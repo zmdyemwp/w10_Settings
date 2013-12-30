@@ -1,0 +1,251 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_SETTINGS            ICON                    "Settings.ico"
+IDI_SMALL               ICON                    "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_SETTINGS MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_SETTINGS ACCELERATORS 
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SETTINGS DIALOGEX 0, 0, 720, 377
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Mode: Run",IDC_BUTTON1,7,7,138,22
+    PUSHBUTTON      "Language: English",IDC_BUTTON2,7,29,138,22
+    PUSHBUTTON      "Key Tone: Off",IDC_BUTTON3,7,51,138,22
+    PUSHBUTTON      "Message Tone: Off",IDC_BUTTON4,7,73,138,21
+    PUSHBUTTON      "Vibration: Off",IDC_BUTTON5,7,94,138,23
+    PUSHBUTTON      "Backlight Timeout: Stays On",IDC_BUTTON6,7,117,138,22
+    PUSHBUTTON      "Backlight Level: Max",IDC_BUTTON7,7,139,138,22
+    PUSHBUTTON      "Orientation: North Up",IDC_BUTTON8,7,161,138,22
+    PUSHBUTTON      "User Location: Show",IDC_BUTTON9,7,183,138,22
+    PUSHBUTTON      "Show Map: Show",IDC_BUTTON10,7,205,138,22
+    PUSHBUTTON      "Ant Weight Scale: No",IDC_BUTTON11,7,227,138,22
+    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_BUTTON12,7,249,138,22
+    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_BUTTON13,7,271,138,22
+    PUSHBUTTON      "Time Format: 12 Hour",IDC_BUTTON14,7,293,138,22
+    PUSHBUTTON      "Time Zone: +8:00",IDC_BUTTON15,7,316,138,22
+    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_BUTTON16,7,338,138,22
+    PUSHBUTTON      "Distance Unit: Statute",IDC_BUTTON17,145,7,138,22
+    PUSHBUTTON      "Position Unit: hddd.ddddd",IDC_BUTTON18,145,29,138,22
+    PUSHBUTTON      "Auto Lap: 30:00 (By Time)",IDC_BUTTON19,145,51,138,22
+    PUSHBUTTON      "Auto Pause: 30:00 (Custom Pace)",IDC_BUTTON20,145,73,138,21
+    PUSHBUTTON      "Auto Scroll: Medium",IDC_BUTTON21,145,94,138,23
+    PUSHBUTTON      "Virtual Partner Enable: Off",IDC_BUTTON22,145,117,138,22
+    PUSHBUTTON      "Pace / Speed: Speed",IDC_BUTTON23,145,139,138,22
+    PUSHBUTTON      "Ant+ Heart Rate Monitor: Yes",IDC_BUTTON24,145,161,138,22
+    PUSHBUTTON      "Ant+ HR Display: Bpm",IDC_BUTTON25,145,183,138,22
+    PUSHBUTTON      "Ant+ Foot Pad: Yes",IDC_BUTTON26,145,205,138,22
+    PUSHBUTTON      "Ant+ Foot Pad Source: Foot Pad",IDC_BUTTON27,145,227,138,22
+    PUSHBUTTON      "Ant+ Foot Pad Step Distance: \nRun: 70 cm\nSwim: 30 cm\n Other: 100 cm",IDC_BUTTON28,145,249,138,44,BS_MULTILINE
+    PUSHBUTTON      "Ant+ Bike Weight: 10 kg",IDC_BUTTON30,145,293,138,22
+    PUSHBUTTON      "Ant+ Bike Odometer: 3000 m",IDC_BUTTON31,145,316,138,22
+    PUSHBUTTON      "Ant+ Bike: Auto",IDC_BUTTON32,145,338,138,22
+    PUSHBUTTON      "Ant+ Bike Wheel Size: 100 cm",IDC_BUTTON29,283,7,138,22
+    PUSHBUTTON      "Ant+ Bike Sensor: Yes",IDC_BUTTON33,283,29,138,22
+    PUSHBUTTON      "Ant+ Power Meter Sensor: Yes",IDC_BUTTON34,283,51,138,22
+    PUSHBUTTON      "BLE Finder: Yes",IDC_BUTTON35,283,140,138,21
+    PUSHBUTTON      "GSensor/Compass Sensor: Yes",IDC_BUTTON36,283,73,138,23
+    PUSHBUTTON      "GSensor Step Distance:\nRun: 70 cm\nSwim: 30 cm\nOther: 100 cm",IDC_BUTTON37,283,96,138,44,BS_MULTILINE
+    PUSHBUTTON      "BLE Heart Rate: Yes",IDC_BUTTON39,283,161,138,22
+    PUSHBUTTON      "Time Zone 2: -8:00",IDC_BUTTON40,283,183,138,22
+    PUSHBUTTON      "DayLight Saving Time 2: Yes",IDC_BUTTON41,283,205,138,22
+    PUSHBUTTON      "GPS Timer Auto Update: Yes",IDC_BUTTON42,283,227,138,22
+    PUSHBUTTON      "BT Notify Tone Time: 500 ms",IDC_BUTTON43,283,249,138,22
+    PUSHBUTTON      "BT Notify Vibration Time: 1000 ms",IDC_BUTTON44,283,271,138,22
+    PUSHBUTTON      "Barometer Sensor: No",IDC_BUTTON45,283,293,138,22,WS_DISABLED
+    PUSHBUTTON      "Themes: Indicator",IDC_BUTTON46,283,316,138,22
+    PUSHBUTTON      "Metronome State: Yes",IDC_BUTTON47,283,338,138,22
+    PUSHBUTTON      "Metronome Interval Time: 1000 ms",IDC_BUTTON38,421,7,138,22
+    PUSHBUTTON      "Metronome Ring Time: 30000 ms",IDC_BUTTON48,421,29,138,22
+    PUSHBUTTON      "Alarm: Yes\n(1) 12:59\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]\n(2) 8:00\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]\n(3) 8:00\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]\n(4) 8:00\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]",IDC_BUTTON49,421,51,138,88,BS_MULTILINE
+    PUSHBUTTON      "Time Alert: 99:59:59",IDC_BUTTON53,421,139,138,22
+    PUSHBUTTON      "Dist. Alert: 1000 m",IDC_BUTTON54,421,161,138,22
+    PUSHBUTTON      "Calorie Alert: 1000 cal",IDC_BUTTON55,421,183,138,22
+    PUSHBUTTON      "HR Alert: 140 Bpm",IDC_BUTTON56,421,205,138,22
+    PUSHBUTTON      "Ant Weight Scale: No",IDC_BUTTON57,421,227,138,22
+    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_BUTTON58,421,249,138,22
+    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_BUTTON59,421,271,138,22
+    PUSHBUTTON      "Time Format: 12 Hour",IDC_BUTTON60,421,293,138,22
+    PUSHBUTTON      "Time Zone: +8:00",IDC_BUTTON61,421,316,138,22
+    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_BUTTON62,421,338,138,22
+    PUSHBUTTON      "Mode: Run",IDC_BUTTON50,559,7,138,22
+    PUSHBUTTON      "Language: English",IDC_BUTTON51,559,29,138,22
+    PUSHBUTTON      "Key Tone: Off",IDC_BUTTON52,559,51,138,22
+    PUSHBUTTON      "Message Tone: Off",IDC_BUTTON63,559,73,138,21
+    PUSHBUTTON      "Vibration: Off",IDC_BUTTON64,559,94,138,23
+    PUSHBUTTON      "Backlight Timeout: Stays On",IDC_BUTTON65,559,117,138,22
+    PUSHBUTTON      "Backlight Level: Max",IDC_BUTTON66,559,139,138,22
+    PUSHBUTTON      "Orientation: North Up",IDC_BUTTON67,559,161,138,22
+    PUSHBUTTON      "User Location: Show",IDC_BUTTON68,559,183,138,22
+    PUSHBUTTON      "Show Map: Show",IDC_BUTTON69,559,205,138,22
+    PUSHBUTTON      "Ant Weight Scale: No",IDC_BUTTON70,559,227,138,22
+    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_BUTTON71,559,249,138,22
+    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_BUTTON72,559,271,138,22
+    PUSHBUTTON      "Time Format: 12 Hour",IDC_BUTTON73,559,293,138,22
+    PUSHBUTTON      "Time Zone: +8:00",IDC_BUTTON74,559,316,138,22
+    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_BUTTON75,559,338,138,22
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 713
+        VERTGUIDE, 145
+        VERTGUIDE, 283
+        VERTGUIDE, 421
+        VERTGUIDE, 559
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 370
+        HORZGUIDE, 29
+        HORZGUIDE, 51
+        HORZGUIDE, 73
+        HORZGUIDE, 94
+        HORZGUIDE, 117
+        HORZGUIDE, 139
+        HORZGUIDE, 161
+        HORZGUIDE, 183
+        HORZGUIDE, 205
+        HORZGUIDE, 227
+        HORZGUIDE, 249
+        HORZGUIDE, 271
+        HORZGUIDE, 293
+        HORZGUIDE, 316
+        HORZGUIDE, 338
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "Settings"
+    IDC_SETTINGS            "SETTINGS"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
