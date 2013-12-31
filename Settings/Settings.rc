@@ -71,86 +71,73 @@ END
 // Dialog
 //
 
-IDD_SETTINGS DIALOGEX 0, 0, 720, 377
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_SETTINGS DIALOGEX 0, 0, 669, 377
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Settings"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
+FONT 8, "System", 700, 0, 0x0
 BEGIN
-    PUSHBUTTON      "Mode: Run",IDC_BUTTON1,7,7,138,22
-    PUSHBUTTON      "Language: English",IDC_BUTTON2,7,29,138,22
-    PUSHBUTTON      "Key Tone: Off",IDC_BUTTON3,7,51,138,22
-    PUSHBUTTON      "Message Tone: Off",IDC_BUTTON4,7,73,138,21
-    PUSHBUTTON      "Vibration: Off",IDC_BUTTON5,7,94,138,23
-    PUSHBUTTON      "Backlight Timeout: Stays On",IDC_BUTTON6,7,117,138,22
-    PUSHBUTTON      "Backlight Level: Max",IDC_BUTTON7,7,139,138,22
-    PUSHBUTTON      "Orientation: North Up",IDC_BUTTON8,7,161,138,22
-    PUSHBUTTON      "User Location: Show",IDC_BUTTON9,7,183,138,22
-    PUSHBUTTON      "Show Map: Show",IDC_BUTTON10,7,205,138,22
-    PUSHBUTTON      "Ant Weight Scale: No",IDC_BUTTON11,7,227,138,22
-    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_BUTTON12,7,249,138,22
-    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_BUTTON13,7,271,138,22
-    PUSHBUTTON      "Time Format: 12 Hour",IDC_BUTTON14,7,293,138,22
-    PUSHBUTTON      "Time Zone: +8:00",IDC_BUTTON15,7,316,138,22
-    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_BUTTON16,7,338,138,22
-    PUSHBUTTON      "Distance Unit: Statute",IDC_BUTTON17,145,7,138,22
-    PUSHBUTTON      "Position Unit: hddd.ddddd",IDC_BUTTON18,145,29,138,22
-    PUSHBUTTON      "Auto Lap: 30:00 (By Time)",IDC_BUTTON19,145,51,138,22
-    PUSHBUTTON      "Auto Pause: 30:00 (Custom Pace)",IDC_BUTTON20,145,73,138,21
-    PUSHBUTTON      "Auto Scroll: Medium",IDC_BUTTON21,145,94,138,23
-    PUSHBUTTON      "Virtual Partner Enable: Off",IDC_BUTTON22,145,117,138,22
-    PUSHBUTTON      "Pace / Speed: Speed",IDC_BUTTON23,145,139,138,22
-    PUSHBUTTON      "Ant+ Heart Rate Monitor: Yes",IDC_BUTTON24,145,161,138,22
-    PUSHBUTTON      "Ant+ HR Display: Bpm",IDC_BUTTON25,145,183,138,22
-    PUSHBUTTON      "Ant+ Foot Pad: Yes",IDC_BUTTON26,145,205,138,22
-    PUSHBUTTON      "Ant+ Foot Pad Source: Foot Pad",IDC_BUTTON27,145,227,138,22
-    PUSHBUTTON      "Ant+ Foot Pad Step Distance: \nRun: 70 cm\nSwim: 30 cm\n Other: 100 cm",IDC_BUTTON28,145,249,138,44,BS_MULTILINE
-    PUSHBUTTON      "Ant+ Bike Weight: 10 kg",IDC_BUTTON30,145,293,138,22
-    PUSHBUTTON      "Ant+ Bike Odometer: 3000 m",IDC_BUTTON31,145,316,138,22
-    PUSHBUTTON      "Ant+ Bike: Auto",IDC_BUTTON32,145,338,138,22
-    PUSHBUTTON      "Ant+ Bike Wheel Size: 100 cm",IDC_BUTTON29,283,7,138,22
-    PUSHBUTTON      "Ant+ Bike Sensor: Yes",IDC_BUTTON33,283,29,138,22
-    PUSHBUTTON      "Ant+ Power Meter Sensor: Yes",IDC_BUTTON34,283,51,138,22
-    PUSHBUTTON      "BLE Finder: Yes",IDC_BUTTON35,283,140,138,21
-    PUSHBUTTON      "GSensor/Compass Sensor: Yes",IDC_BUTTON36,283,73,138,23
-    PUSHBUTTON      "GSensor Step Distance:\nRun: 70 cm\nSwim: 30 cm\nOther: 100 cm",IDC_BUTTON37,283,96,138,44,BS_MULTILINE
-    PUSHBUTTON      "BLE Heart Rate: Yes",IDC_BUTTON39,283,161,138,22
-    PUSHBUTTON      "Time Zone 2: -8:00",IDC_BUTTON40,283,183,138,22
-    PUSHBUTTON      "DayLight Saving Time 2: Yes",IDC_BUTTON41,283,205,138,22
-    PUSHBUTTON      "GPS Timer Auto Update: Yes",IDC_BUTTON42,283,227,138,22
-    PUSHBUTTON      "BT Notify Tone Time: 500 ms",IDC_BUTTON43,283,249,138,22
-    PUSHBUTTON      "BT Notify Vibration Time: 1000 ms",IDC_BUTTON44,283,271,138,22
-    PUSHBUTTON      "Barometer Sensor: No",IDC_BUTTON45,283,293,138,22,WS_DISABLED
-    PUSHBUTTON      "Themes: Indicator",IDC_BUTTON46,283,316,138,22
-    PUSHBUTTON      "Metronome State: Yes",IDC_BUTTON47,283,338,138,22
-    PUSHBUTTON      "Metronome Interval Time: 1000 ms",IDC_BUTTON38,421,7,138,22
-    PUSHBUTTON      "Metronome Ring Time: 30000 ms",IDC_BUTTON48,421,29,138,22
-    PUSHBUTTON      "Alarm: Yes\n(1) 12:59\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]\n(2) 8:00\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]\n(3) 8:00\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]\n(4) 8:00\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]",IDC_BUTTON49,421,51,138,88,BS_MULTILINE
-    PUSHBUTTON      "Time Alert: 99:59:59",IDC_BUTTON53,421,139,138,22
-    PUSHBUTTON      "Dist. Alert: 1000 m",IDC_BUTTON54,421,161,138,22
-    PUSHBUTTON      "Calorie Alert: 1000 cal",IDC_BUTTON55,421,183,138,22
-    PUSHBUTTON      "HR Alert: 140 Bpm",IDC_BUTTON56,421,205,138,22
-    PUSHBUTTON      "Ant Weight Scale: No",IDC_BUTTON57,421,227,138,22
-    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_BUTTON58,421,249,138,22
-    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_BUTTON59,421,271,138,22
-    PUSHBUTTON      "Time Format: 12 Hour",IDC_BUTTON60,421,293,138,22
-    PUSHBUTTON      "Time Zone: +8:00",IDC_BUTTON61,421,316,138,22
-    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_BUTTON62,421,338,138,22
-    PUSHBUTTON      "Mode: Run",IDC_BUTTON50,559,7,138,22
-    PUSHBUTTON      "Language: English",IDC_BUTTON51,559,29,138,22
-    PUSHBUTTON      "Key Tone: Off",IDC_BUTTON52,559,51,138,22
-    PUSHBUTTON      "Message Tone: Off",IDC_BUTTON63,559,73,138,21
-    PUSHBUTTON      "Vibration: Off",IDC_BUTTON64,559,94,138,23
-    PUSHBUTTON      "Backlight Timeout: Stays On",IDC_BUTTON65,559,117,138,22
-    PUSHBUTTON      "Backlight Level: Max",IDC_BUTTON66,559,139,138,22
-    PUSHBUTTON      "Orientation: North Up",IDC_BUTTON67,559,161,138,22
-    PUSHBUTTON      "User Location: Show",IDC_BUTTON68,559,183,138,22
-    PUSHBUTTON      "Show Map: Show",IDC_BUTTON69,559,205,138,22
-    PUSHBUTTON      "Ant Weight Scale: No",IDC_BUTTON70,559,227,138,22
-    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_BUTTON71,559,249,138,22
-    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_BUTTON72,559,271,138,22
-    PUSHBUTTON      "Time Format: 12 Hour",IDC_BUTTON73,559,293,138,22
-    PUSHBUTTON      "Time Zone: +8:00",IDC_BUTTON74,559,316,138,22
-    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_BUTTON75,559,338,138,22
+    PUSHBUTTON      "Mode: Run",IDC_MODE,7,7,132,22
+    PUSHBUTTON      "Language: English",IDC_LANG,7,29,132,22
+    PUSHBUTTON      "Key Tone: Off",IDC_KEYTONE,7,51,132,22
+    PUSHBUTTON      "Message Tone: Off",IDC_MESSAGETONE,7,73,132,21
+    PUSHBUTTON      "Vibration: Off",IDC_VIBRATION,7,94,132,23
+    PUSHBUTTON      "Backlight Timeout: Stays On",IDC_BK_TIMEOUT,7,117,132,22
+    PUSHBUTTON      "Backlight Level: Max",IDC_BK_LEVEL,7,139,132,22
+    PUSHBUTTON      "Orientation: North Up",IDC_ORIENTATION,7,161,132,22
+    PUSHBUTTON      "User Location: Show",IDC_USER_LOCATION,7,183,132,22
+    PUSHBUTTON      "Show Map: Show",IDC_SHOW_MAP,7,205,132,22
+    PUSHBUTTON      "Ant Weight Scale: No",IDC_ANT_WEIGHT_SCALE,7,227,132,22
+    PUSHBUTTON      "ANT Fitness Equipment: No",IDC_ANT_FITNESS_EQUIPMENT,7,249,132,22
+    PUSHBUTTON      "Record Data Points: Smart Recording",IDC_RECORD_DATA_POINTS,7,271,132,22
+    PUSHBUTTON      "Time Format: 12 Hour",IDC_TIME_FORMAT,7,293,132,23
+    PUSHBUTTON      "Time Zone: +8:00",IDC_TIME_ZONE_1,7,316,132,22
+    PUSHBUTTON      "DayLight Saving Time: Yes",IDC_DAYLIGHT_SAVING_1,7,338,132,22
+    PUSHBUTTON      "Distance Unit: Statute",IDC_UNIT,139,7,132,22
+    PUSHBUTTON      "Position Unit: hddd.ddddd",IDC_POSITION_UNIT,139,29,132,22
+    PUSHBUTTON      "Auto Lap: 30:00 (By Time)",IDC_AUTO_LAP,139,51,132,22
+    PUSHBUTTON      "Auto Pause: 30:00 (Custom Pace)",IDC_AUTO_PAUSE,139,73,132,21
+    PUSHBUTTON      "Auto Scroll: Medium",IDC_AUTO_SCROLL,139,94,132,23
+    PUSHBUTTON      "Virtual Partner Enable: Off",IDC_VIRTUAL_PARTNER,139,117,132,22
+    PUSHBUTTON      "Pace / Speed: Speed",IDC_PACE_SPEED,139,139,132,22
+    PUSHBUTTON      "Ant+ Heart Rate Monitor: Yes",IDC_ANT_HEART_RATE_MONITOR,139,161,132,22
+    PUSHBUTTON      "Ant+ HR Display: Bpm",IDC_ANT_HEART_RATE_DISPLAY,139,183,132,22
+    PUSHBUTTON      "Ant+ Foot Pad: Yes",IDC_ANT_FOOT_PAD,139,205,132,22
+    PUSHBUTTON      "Ant+ Foot Pad Source: Foot Pad",IDC_ANT_FOOT_PAD_SOURCE,139,227,132,22
+    PUSHBUTTON      "Ant+ Foot Pad Step Distance: \nRun: 70 cm\nSwim: 30 cm\n Other: 100 cm",IDC_ANT_FOOT_STEP_DISTANCE,139,249,132,44,BS_MULTILINE
+    PUSHBUTTON      "Ant+ Bike Weight: 10 kg",IDC_ANT_BIKE_WEIGHT,139,293,132,23
+    PUSHBUTTON      "Ant+ Bike Odometer: 3000 m",IDC_ANT_BIKE_ODOMETER,139,316,132,22
+    PUSHBUTTON      "Ant+ Bike: Auto",IDC_ANT_BIKE,139,338,132,22
+    PUSHBUTTON      "Ant+ Bike Wheel Size: 100 cm",IDC_ANT_BIKE_WHEEL_SIZE,271,7,131,22
+    PUSHBUTTON      "Ant+ Bike Sensor: Yes",IDC_ANT_BIKE_SENSOR,271,29,131,22
+    PUSHBUTTON      "Ant+ Power Meter Sensor: Yes",IDC_ANT_POWER_METER_SENSOR,271,51,131,22
+    PUSHBUTTON      "BLE Finder: Yes",IDC_BLE_FINDER,271,139,131,22
+    PUSHBUTTON      "GSensor/Compass Sensor: Yes",IDC_GSENSOR_COMPASS_SENSOR,271,73,131,21
+    PUSHBUTTON      "GSensor Step Distance:\nRun: 70 cm\nSwim: 30 cm\nOther: 100 cm",IDC_GSENSOR_STEP_DISTANCE,271,94,131,45,BS_MULTILINE
+    PUSHBUTTON      "BLE Heart Rate: Yes",IDC_BLE_HEART_RATE,271,161,131,22
+    PUSHBUTTON      "Time Zone 2: -8:00",IDC_TIME_ZONE_2,271,183,131,22
+    PUSHBUTTON      "DayLight Saving Time 2: Yes",IDC_DAYLIGHT_SAVING_2,271,205,131,22
+    PUSHBUTTON      "GPS Timer Auto Update: Yes",IDC_GPS_TIMER_AUTO_UPDATE,271,227,131,22
+    PUSHBUTTON      "BT Notify Tone Time: 500 ms",IDC_BT_NOTIFY_TONE_TIME,271,249,131,22
+    PUSHBUTTON      "BT Notify Vibration Time: 1000 ms",IDC_BT_NOTIFY_VIBRATION_TIME,271,271,131,22
+    PUSHBUTTON      "Barometer Sensor: No",IDC_BAROMETER_SENSOR,271,293,131,23,WS_DISABLED
+    PUSHBUTTON      "Themes: Indicator",IDC_THEME,271,316,131,22
+    PUSHBUTTON      "Metronome State: Yes",IDC_METRONOME_STATE,271,338,131,22
+    PUSHBUTTON      "Metronome Interval Time: 1000 ms",IDC_METRONOME_INTERVAL,402,7,140,22
+    PUSHBUTTON      "Metronome Ring Time: 30000 ms",IDC_METRONOME_RING_TIME,402,29,140,22
+    PUSHBUTTON      "Alarm: Yes\n(1) 12:59\n[Sun, Mon, Tue, Wed, Thu, Fri, Sat]",IDC_ALARM,402,51,140,88,BS_MULTILINE
+    PUSHBUTTON      "Time Alert: 99:59:59",IDC_TIME_ALERT,402,139,140,22
+    PUSHBUTTON      "Dist. Alert: 1000 m",IDC_DIST_ALERT,402,161,140,22
+    PUSHBUTTON      "Calorie Alert: 1000 cal",IDC_CALORIE_ALERT,402,183,140,22
+    PUSHBUTTON      "HR Alert: 140 Bpm",IDC_HR_ALERT,402,205,140,22
+    PUSHBUTTON      "Interval: 1:00:00",IDC_INTERVAL,402,227,140,22
+    PUSHBUTTON      "Rest: 0:05:00",IDC_REST,402,249,140,22
+    PUSHBUTTON      "Reps: 10",IDC_REPTS,402,271,140,22
+    PUSHBUTTON      "Warm Up: Enable",IDC_WARM_UP,402,293,140,23
+    PUSHBUTTON      "Cool Down: Enable",IDC_COOL_DOWN,402,316,140,22
+    PUSHBUTTON      "Gender: Male",IDC_GENDER,402,338,140,22
+    PUSHBUTTON      "Age: 18",IDC_AGE,542,7,120,22
+    PUSHBUTTON      "Weight:\n60 kg / 132.28 pound\n\nHeight:\n180 cm / 70.87 inch",IDC_WEIGHT_HEIGHT,542,29,120,65,BS_MULTILINE
+    PUSHBUTTON      "Lifetime Athlete: Yes",IDC_LIFETIME_ATHLETE,542,94,120,23
 END
 
 
@@ -165,11 +152,12 @@ BEGIN
     IDD_SETTINGS, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 713
-        VERTGUIDE, 145
-        VERTGUIDE, 283
-        VERTGUIDE, 421
-        VERTGUIDE, 559
+        RIGHTMARGIN, 662
+        VERTGUIDE, 139
+        VERTGUIDE, 271
+        VERTGUIDE, 402
+        VERTGUIDE, 542
+        VERTGUIDE, 662
         TOPMARGIN, 7
         BOTTOMMARGIN, 370
         HORZGUIDE, 29
@@ -232,6 +220,138 @@ STRINGTABLE
 BEGIN
     IDS_APP_TITLE           "Settings"
     IDC_SETTINGS            "SETTINGS"
+END
+
+STRINGTABLE 
+BEGIN
+    
+	IDS_WWE_MODE	"Mode"
+	IDS_WWE_RUN	"Run"
+	IDS_WWE_BIKE	"Bike"
+	IDS_WWE_SWIM	"Swim"
+	IDS_WWE_OTHER	"Other"
+	IDS_WWE_LANGUAGE	"Language"
+	IDS_WWE_WWE	"WWE"
+	IDS_WWE_CHT	"CHT"
+	IDS_WWE_CHS	"CHS"
+	IDS_WWE_KEY_TONE	"Key Tone:"
+	IDS_WWE_ON	"On"
+	IDS_WWE_OFF	"Off"
+	IDS_WWE_MESSAGE_TONE	"Message Tone:"
+	IDS_WWE_VIBRATION	"Vibration"
+	IDS_WWE_BACKLIGHT_TIMEOUT	"Backlight Timeout:"
+	IDS_WWE_STAYS_ON	"Stays On"
+	IDS_WWE_SECONDS	"seconds"
+	IDS_WWE_BACKLIGHT_LEVEL	"Backlight Brightness:"
+	IDS_WWE_HIGH	"High"
+	IDS_WWE_MIDDLE	"Middle"
+	IDS_WWE_ORIENTATION	"Orientation:"
+	IDS_WWE_NORTH_UP	"North Up"
+	IDS_WWE_TRACK_UP	"Track Up"
+	IDS_WWE_USER_LOCATION	"User Location:"
+	IDS_WWE_HIDE	"Hide"
+	IDS_WWE_SHOW	"Show"
+	IDS_WWE_SHOW_MAP	"Show Map:"
+	IDS_WWE_YES	"Yes"
+	IDS_WWE_NO	"No"
+	IDS_WWE_ANT_WEIGHT_SCALE	"ANT Weight Scale:"
+	IDS_WWE_ANT_FITNESS_EQUIPMENT	"ANT Fitness Equipment:"
+	IDS_WWE_RECORD_DATA_POINT	"Record Data Points:"
+	IDS_WWE_SMART_RECORDING	"Smart Recording"
+	IDS_WWE_EVENT_RECORDING	"Event Recording"
+	IDS_WWE_NO_RECORD	"No Record"
+	IDS_WWE_TIME_FORMAT	"Time Format:"
+	IDS_WWE_HOUR	"hours"
+	IDS_WWE_TIME_ZONE	"Time Zone:"
+	IDS_WWE_MINUTES	"minutes"
+	IDS_WWE_TIME_SAVING	"Daylight Saving Time:"
+	IDS_WWE_UNIT	"Unit:"
+	IDS_WWE_METRIC	"Metric"
+	IDS_WWE_STATUTE	"Statute"
+	IDS_WWE_POSITION	"Position:"
+	IDS_WWE_AUTO_LAP_TRIGGER	"Auto Lap Trigger:"
+	IDS_WWE_BY_TIME	"By Time"
+	IDS_WWE_BY_DISTANCE	"By Distance"
+	IDS_WWE_AUTO_TIMER_PAUSE	"Auto Timer Pause:"
+	IDS_WWE_WHEN_STOPPED	"When Stopped"
+	IDS_WWE_CUSTOM_PACE	"Custom Pace"
+	IDS_WWE_PAUSE_WHEN	"Pause When:"
+	IDS_WWE_AUTO_SCROLL	"Auto Scroll:"
+	IDS_WWE_SLOW	"Slow"
+	IDS_WWE_MEDIUM	"Medium"
+	IDS_WWE_FAST	"Fast"
+	IDS_WWE_VIRTUAL_PARTNER_ENABLE	"Virtual Partner Enable:"
+	IDS_WWE_PACE	"Pace"
+	IDS_WWE_SPEED	"Speed"
+	IDS_WWE_ANT_HEART_RATE_MONITOR	"Ant+ Heart Rate Monitor:"
+	IDS_WWE_ANT_HR_DISPLAY	"Ant+ HR Display:"
+	IDS_WWE_BPM	"Bpm"
+	IDS_WWE_ANT_FOOT_PAD	"Ant+ Foot Pad:"
+	IDS_WWE_ANT_FOOT_PAD_SOURCE	"Ant+ Foot Pad Source:"
+	IDS_WWE_GPS	"GPS"
+	IDS_WWE_FOOT_PAD	"Foot Pad"
+	IDS_WWE_ANT_FOOT_PAD_STEP_DISTANCE	"Ant+ Foot Pad Step Distance:"
+	IDS_WWE_CM	"cm"
+	IDS_WWE_ANT_BIKE_WEIGHT	"Ant+ Bike Weight:"
+	IDS_WWE_KG	"kg"
+	IDS_WWE_ANT_BIKE_ODOMETER	"Ant+ Bike Odometer:"
+	IDS_WWE_ANT_BIKE_AUTO_MANUAL	"Ant+ Bike Auto/Manual:"
+	IDS_WWE_ANT_BIKE_WHEEL_SIZE	"Ant+ Bike Wheel Size:"
+	IDS_WWE_ANT_BIKE_SENSOR	"Ant+ Bike Sensor:"
+	IDS_WWE_ANT_POWER_METER_SENSOR	"Ant+ Power Meter Sensor:"
+	IDS_WWE_GSENSOR_COMPASS	"GSensor/Compass Sensor:"
+	IDS_WWE_GSENSOR_STEP_DISTANCE	"GSensor Step Distance:"
+	IDS_WWE_BLE_FINDER	"BLE Finder Function:"
+	IDS_WWE_BLE_HR	"BLE Heart Rate Function:"
+	IDS_WWE_GPS_AUTO_UPDATE	"GPS Timer Auto Update:"
+	IDS_WWE_BT_SPP_TONE	"BT Notify Tone Time:"
+	IDS_WWE_BT_SPP_VIBRATION	"BT Notify Vibraton Time:"
+	IDS_WWE_MS	"ms"
+	IDS_WWE_BAROMETER_SENSOR	"Barometer Sensor:"
+	IDS_WWE_THEME	"Themes:"
+	IDS_WWE_DIGITAL	"Digital"
+	IDS_WWE_INDICATOR	"Indicator"
+	IDS_WWE_METRONOME	"Metronome State:"
+	IDS_WWE_METRONOME_TIME	"Metronome Interval Time:"
+	IDS_WWE_METRONOME_RING	"Metronome Ring Time:"
+	IDS_WWE_ALARM_ID_STATE	"Alarm %d:"
+	IDS_WWE_ALARM_ID_WEEK	"Alarm %d Week:"
+	IDS_WWE_ALARM_ID_HOUR	"Alarm %d Hour:"
+	IDS_WWE_ALARM_ID_MINUTE	"Alarm %d Minute:"
+	IDS_WWE_SUN	"SUN"
+	IDS_WWE_MON	"MON"
+	IDS_WWE_TUE	"TUE"
+	IDS_WWE_WED	"WED"
+	IDS_WWE_THU	"THU"
+	IDS_WWE_FRI	"FRI"
+	IDS_WWE_SAT	"SAT"
+	IDS_WWE_TIME_ALART	"Time Alert:"
+	IDS_WWE_DISTANCE_ALART	"Dist. Alert:"
+	IDS_WWE_CALORIE_ALART	"Calorie Alert:"
+	IDS_WWE_CAL	"cal"
+	IDS_WWE_HR_ALART	"Heart Rate Alert:"
+	IDS_WWE_INTERVAL_TYPE	"Interval:"
+	IDS_WWE_DISTANCE	"Distance"
+	IDS_WWE_TIME	"Time"
+	IDS_WWE_REST_TYPE	"Rest Type:"
+	IDS_WWE_REPEATS	"Reps:"
+	IDS_WWE_WARM_UP	"Warm Up:"
+	IDS_WWE_COOL_DOWN	"Cool Down:"
+	IDS_WWE_ENABLE	"Enable"
+	IDS_WWE_DISABLE	"Disable"
+	IDS_WWE_GENDER	"Gender:"
+	IDS_WWE_MALE	"Male"
+	IDS_WWE_FEMALE	"Female"
+	IDS_WWE_AGE	"Age:"
+	IDS_WWE_WEIGHT	"Weight:"
+	IDS_WWE_HEIGHT	"Height:"
+	IDS_WWE_POUND	"pound"
+	IDS_WWE_INCH	"inch"
+	IDS_WWE_LIFETIME_ATHLETE	"Lifetime Athlete:"
+
+    
+    
+    
 END
 
 #endif    // English (U.S.) resources

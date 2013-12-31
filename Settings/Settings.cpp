@@ -3,8 +3,15 @@
 
 #include "stdafx.h"
 #include "Settings.h"
+#include "mmi_frame.h"
+
+TCHAR msg[1024];
+
+GLOBAL_SETTING g_Setting;
 
 
+HINSTANCE g_hInst;
+HWND g_hDlg;
 INT_PTR CALLBACK	SettingProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
@@ -12,7 +19,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                      LPTSTR    lpCmdLine,
                      int       nCmdShow)
 {
-	DialogBox(hInstance, MAKEINTRESOURCE(IDD_SETTINGS), NULL, (DLGPROC)SettingProc);
+	g_hInst = hInstance;
+	memset(&g_Setting, 0, sizeof(GLOBAL_SETTING));
+	wsprintf(msg, L"%d", sizeof(GLOBAL_SETTING));
+	dmsg(msg);
+
+	DialogBox(hInstance, MAKEINTRESOURCE(IDD_SETTINGS), NULL, SettingProc);
 	return 0;
 }
 
@@ -23,6 +35,7 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 	switch (message)
 	{
 	case WM_INITDIALOG:
+		g_hDlg = hDlg;
 		return (INT_PTR)TRUE;
 
 	case WM_COMMAND:
@@ -36,4 +49,6 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 	return (INT_PTR)FALSE;
 }
 
+void Refresh(void) {
 
+}
