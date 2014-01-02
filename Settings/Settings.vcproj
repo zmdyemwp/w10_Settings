@@ -172,6 +172,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\doneTable.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Settings.cpp"
 				>
 			</File>
@@ -194,6 +198,10 @@
 						UsePrecompiledHeader="1"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\w10Param.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
@@ -223,6 +231,10 @@
 			</File>
 			<File
 				RelativePath=".\targetver.h"
+				>
+			</File>
+			<File
+				RelativePath=".\w10Param.h"
 				>
 			</File>
 		</Filter>

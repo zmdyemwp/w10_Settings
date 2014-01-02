@@ -5,6 +5,7 @@ struct W10PARAM {
 	DWORD title;
 	DWORD options[8];
 	DWORD count;
+	DWORD index;
 };
 
 extern W10PARAM	mode;
