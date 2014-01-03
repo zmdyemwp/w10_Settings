@@ -13,7 +13,7 @@ void dmsg(TCHAR * msg, DWORD x)
 		return;
 
 	TCHAR buffer[1024+1] = {0};
-	swprintf(buffer, 1024, L"[Cosmos]\t%s\r\n", msg);
+	swprintf(buffer, 1024, L"[Cosmos::Settings]\t%s\r\n", msg);
 	HWND hDlg = FindWindow(NULL, L"DebugMsg");
 	if(IsWindow(hDlg))
 	{

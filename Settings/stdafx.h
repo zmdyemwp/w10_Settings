@@ -21,4 +21,5 @@
 // TODO: reference additional headers your program requires here
 extern TCHAR msg[];
 void dmsg(TCHAR * msg, DWORD x=1);
+TCHAR* w10_LoadString(DWORD id);
 

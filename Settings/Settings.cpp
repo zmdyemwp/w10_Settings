@@ -6,23 +6,10 @@
 #include "mmi_frame.h"
 #include "resource.h"
 #include "w10Param.h"
+#include "dlgProcs.h"
 
-#define		dim(x)		sizeof(x)/sizeof(x[0])
-extern DWORD doneTable[];
-BOOL checkDoneTable(DWORD id) {
-	DWORD i = 0;
-	for(i = 0; i < dim(doneTable); i++) {
-		if(id == doneTable[i]) {
-			break;
-		}
-	}
-	if(i < dim(doneTable)) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-}
 
+BOOL checkDoneTable(DWORD id);
 
 TCHAR msg[1024+1];
 
@@ -62,13 +49,22 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		Refresh();
 		return (INT_PTR)TRUE;
 
-	case WM_CTLCOLORBTN:
-		/*
-		if(checkDoneTable();
+	/*case WM_CTLCOLORBTN:
 		{
+			DWORD id = GetDlgCtrlID((HWND)lParam);
+			//if(checkDoneTable(id)) {
+			if(1) {
+				swprintf(msg, 1024, L"ID: %d", id);
+				dmsg(msg);
+				if(CLR_INVALID == SetTextColor((HDC)wParam, RGB(255,0,0))) {
+					swprintf(msg, 1024, L"SetTextColor()::%d", GetLastError());
+					dmsg(msg);
+				}
+				SetBkMode((HDC)wParam, TRANSPARENT);    
+				return (LRESULT)GetStockObject(NULL_BRUSH);
+			}
 		}
-		*/
-		return TRUE;
+		return (LRESULT)GetStockObject(BLACK_BRUSH);*/
 
 	case WM_COMMAND:
 		switch(LOWORD(wParam)) {
@@ -81,7 +77,7 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				return (INT_PTR)TRUE;
 
 			//------------------------------------------
-			//		Binary Options
+			//		BOOL Options
 			//			Settings
 			case IDC_KEYTONE:
 				reverseBool(g_Setting.KeyTone);
@@ -170,7 +166,7 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				reverseBool(g_Setting.Metronome);
 				break;
 			//------------------------------------------
-			//		Binary Options
+			//		BOOL Options
 			//			Training
 			case IDC_WARM_UP:
 				reverseBool(g_Training.WarmUp);
@@ -183,6 +179,117 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				break;
 			case IDC_LIFETIME_ATHLETE:
 				reverseBool(g_Training.LFAthlete);
+				break;
+			//------------------------------------------
+			//		COMBO Options
+			case IDC_MODE:
+				if(0 < g_Setting.Mode && 6 > g_Setting.Mode) {
+					mode.index = g_Setting.Mode - 1;
+				} else {
+					mode.index = 0;
+				}
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&mode);
+				g_Setting.Mode = mode.index + 1;
+				break;
+
+			case IDC_LANG:
+				if(0 < g_Setting.Language && 4 > g_Setting.Language) {
+					lang.index = g_Setting.Language - 1;
+				} else {
+					lang.index = 0;
+				}
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&lang);
+				g_Setting.Language = (0 == lang.index)? lang.index:lang.index + 1;
+				break;
+
+			case IDC_BK_LEVEL:
+				if(0 <= g_Setting.BacklightLevel && 3 > g_Setting.BacklightLevel) {
+					bklevel.index = g_Setting.BacklightLevel;
+				} else {
+					bklevel.index = 0;
+				}
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&bklevel);
+				g_Setting.BacklightLevel = bklevel.index;
+				break;
+
+			case IDC_RECORD_DATA_POINTS:
+				if(0 <= g_Setting.RecordData && 3 > g_Setting.RecordData) {
+					recorddata.index = g_Setting.RecordData;
+				} else {
+					recorddata.index = 0;
+				}
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&recorddata);
+				g_Setting.RecordData = recorddata.index;
+				break;
+
+			case IDC_POSITION_UNIT:
+				if(0 <= g_Setting.PositionUnit && 3 > g_Setting.PositionUnit) {
+					position.index = g_Setting.PositionUnit;
+				} else {
+					position.index = 0;
+				}
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&position);
+				g_Setting.PositionUnit = position.index;
+				break;
+			
+			case IDC_AUTO_SCROLL:
+				if(0 <= g_Setting.AutoScroll && 4 > g_Setting.AutoScroll) {
+					autoscroll.index = g_Setting.AutoScroll;
+				} else {
+					autoscroll.index = 0;
+				}
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&autoscroll);
+				g_Setting.AutoScroll = autoscroll.index;
+				break;
+			//------------------------------------------
+			//		Time Zone
+			case IDC_TIME_ZONE_1:
+				timezone1.index = g_Setting.TimeZone;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_TIMEZONE), hDlg, TimeZoneProc, (LPARAM)&timezone1);
+				g_Setting.TimeZone = timezone1.index;
+				break;
+			case IDC_TIME_ZONE_2:
+				timezone2.index = g_Setting.TimeZone2;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_TIMEZONE), hDlg, TimeZoneProc, (LPARAM)&timezone2);
+				g_Setting.TimeZone2 = timezone2.index;
+				break;
+			//------------------------------------------
+			//		Edit Options
+			case IDC_BK_TIMEOUT:
+				bktimeout.index = g_Setting.BacklightTimeout;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&bktimeout);
+				g_Setting.BacklightTimeout = bktimeout.index;
+				break;
+
+			case IDC_ANT_BIKE_WEIGHT:
+				antbikeweight.index = g_Setting.ANTBikeWeight;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&antbikeweight);
+				g_Setting.ANTBikeWeight = antbikeweight.index;
+				break;
+
+			case IDC_ANT_BIKE_ODOMETER:
+				antbikeodometer.index = g_Setting.ANTBikeOdometer;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&antbikeodometer);
+				g_Setting.ANTBikeOdometer = antbikeodometer.index;
+				break;
+
+
+			case IDC_ANT_BIKE_WHEEL_SIZE:
+				antbikewheel.index = g_Setting.ANTBikeWheel;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&antbikewheel);
+				g_Setting.ANTBikeWheel = antbikewheel.index;
+				break;
+
+			case IDC_BT_NOTIFY_TONE_TIME:
+				btspptone.index = g_Setting.BTSPPTone;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&btspptone);
+				g_Setting.BTSPPTone = btspptone.index;
+				break;
+				
+			case IDC_BT_NOTIFY_VIBRATION_TIME:
+				btsppvibration.index = g_Setting.BTSPPVibration;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&btsppvibration);
+				g_Setting.BTSPPVibration = btsppvibration.index;
 				break;
 
 			default:
@@ -238,7 +345,7 @@ void Refresh(void) {
 	} else if(0 == g_Setting.BacklightTimeout) {
 		swprintf(temp + len, 128 - len, L"%s", w10_LoadString(IDS_WWE_STAYS_ON));
 	}
-	SetDlgItemText(g_hDlg, IDS_WWE_BACKLIGHT_TIMEOUT, temp);
+	SetDlgItemText(g_hDlg, IDC_BK_TIMEOUT, temp);
 
 	//		Backlight Level
 	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_BACKLIGHT_LEVEL));
@@ -275,7 +382,13 @@ void Refresh(void) {
 	fillTrueFalse(IDC_TIME_FORMAT, g_Setting.TimeFormat, IDS_WWE_TIME_FORMAT, IDS_WWE_HOUR_12, IDS_WWE_HOUR_24);
 
 	//		Time Zone 1
-
+	DWORD hour = g_Setting.TimeZone >> 8;
+	DWORD minute = g_Setting.TimeZone & 0xff;
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_TIME_ZONE_1));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%s%d:%02d",
+		(20 > hour)? "+":"-", (20 > hour)? hour:32-hour, minute);
+	SetDlgItemText(g_hDlg, IDC_TIME_ZONE_1, temp);
 
 	//		DayLight Saving 1
 	fillTrueFalse(IDC_DAYLIGHT_SAVING_1, g_Setting.TimeSaving, IDS_WWE_TIME_SAVING_1, IDS_WWE_NO, IDS_WWE_YES);
@@ -286,8 +399,8 @@ void Refresh(void) {
 	//		Position Unit
 	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_POSITION));
 	len = wcslen(temp);
-	if(0 <= g_Setting.RecordData && 3 > g_Setting.RecordData) {
-		swprintf(temp + len, 128 - len, L"%s", w10_LoadString(position.options[g_Setting.RecordData]));
+	if(0 <= g_Setting.PositionUnit && 3 > g_Setting.PositionUnit) {
+		swprintf(temp + len, 128 - len, L"%s", w10_LoadString(position.options[g_Setting.PositionUnit]));
 	}
 	SetDlgItemText(g_hDlg, IDC_POSITION_UNIT, temp);
 
@@ -325,16 +438,25 @@ void Refresh(void) {
 
 
 	//		ANT+ Bike Weight
-
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_ANT_BIKE_WEIGHT));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	antbikeweight.index, w10_LoadString(IDS_WWE_KG));
+	SetDlgItemText(g_hDlg, IDC_ANT_BIKE_WEIGHT, temp);
 
 	//		ANT+ Bike Odometer
-
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_ANT_BIKE_ODOMETER));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	antbikeodometer.index, w10_LoadString(IDS_WWE_METERS));
+	SetDlgItemText(g_hDlg, IDC_ANT_BIKE_ODOMETER, temp);
 
 	//		ANT+ Bike
 	fillTrueFalse(IDC_ANT_BIKE, g_Setting.ANTBikeAuto, IDS_WWE_ANT_BIKE_AUTO_MANUAL, IDS_WWE_ANT_BIKE_AUTO, IDS_WWE_ANT_BIKE_MANUAL);
 
 	//		ANT+ Bike Wheel Size
-
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_ANT_BIKE_WHEEL_SIZE));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	antbikewheel.index, w10_LoadString(IDS_WWE_CM));
+	SetDlgItemText(g_hDlg, IDC_ANT_BIKE_WHEEL_SIZE, temp);
 
 	//		ANT+ Bike Sensor
 	fillTrueFalse(IDC_ANT_BIKE_SENSOR, g_Setting.ANTBikeSensor, IDS_WWE_ANT_BIKE_SENSOR, IDS_WWE_NO, IDS_WWE_YES);
@@ -355,6 +477,13 @@ void Refresh(void) {
 	fillTrueFalse(IDC_BLE_HEART_RATE, g_Setting.BLEHR, IDS_WWE_BLE_HR, IDS_WWE_NO, IDS_WWE_YES);
 
 	//		Time Zone 2
+	hour = g_Setting.TimeZone2 >> 8;
+	minute = g_Setting.TimeZone2 & 0xff;
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_TIME_ZONE_2));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%s%d:%02d",
+		(20 > hour)? "+":"-", (20 > hour)? hour:32-hour, minute);
+	SetDlgItemText(g_hDlg, IDC_TIME_ZONE_2, temp);
 
 	//		Daylight Saving 2
 	fillTrueFalse(IDC_DAYLIGHT_SAVING_2, g_Setting.TimeSaving2, IDS_WWE_TIME_SAVING_2, IDS_WWE_NO, IDS_WWE_YES);
@@ -363,10 +492,16 @@ void Refresh(void) {
 	fillTrueFalse(IDC_GPS_TIMER_AUTO_UPDATE, g_Setting.GPSAutoUpdate, IDS_WWE_GPS_AUTO_UPDATE, IDS_WWE_NO, IDS_WWE_YES);
 
 	//		BT SPP Tone
-
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_BT_SPP_TONE));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	btspptone.index, w10_LoadString(IDS_WWE_MS));
+	SetDlgItemText(g_hDlg, IDC_BT_NOTIFY_TONE_TIME, temp);
 
 	//		BT SPP Vibration
-
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_BT_SPP_VIBRATION));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	btsppvibration.index, w10_LoadString(IDS_WWE_MS));
+	SetDlgItemText(g_hDlg, IDC_BT_NOTIFY_VIBRATION_TIME, temp);
 
 	//		Barometer Sensor
 	fillTrueFalse(IDC_BAROMETER_SENSOR, g_Setting.BarometerOn, IDS_WWE_BAROMETER_SENSOR, IDS_WWE_NO, IDS_WWE_YES);
@@ -378,8 +513,16 @@ void Refresh(void) {
 	fillTrueFalse(IDC_METRONOME_STATE, g_Setting.Metronome, IDS_WWE_METRONOME, IDS_WWE_NO, IDS_WWE_YES);
 
 	//		Metronome Interval
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_METRONOME_TIME));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	metronomeInterval.index, w10_LoadString(IDS_WWE_MS));
+	SetDlgItemText(g_hDlg, IDC_METRONOME_INTERVAL, temp);
 
 	//		Metronome Ring Time
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_METRONOME_RING));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d %s", 	metronomeRing.index, w10_LoadString(IDS_WWE_MS));
+	SetDlgItemText(g_hDlg, IDC_METRONOME_RING_TIME, temp);
 
 	//		Alarm * 4
 

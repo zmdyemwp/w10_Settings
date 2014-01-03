@@ -83,6 +83,20 @@
 #define	IDC_WEIGHT_HEIGHT	1060
 #define	IDC_LIFETIME_ATHLETE	1061
 
+//		CTL ids of Dialogs
+#define	IDD_COMBO_LIST	100
+#define	IDC_OPTIONS	101
+#define	IDC_APPLY	102
+
+#define	IDD_EDIT	200
+#define	IDC_UNIT_TEXT	201
+#define	IDC_EDIT	202
+
+#define	IDD_TIMEZONE	300
+#define	IDC_HOUR	301
+#define	IDC_MINUTE	302
+
+
 #define IDC_STATIC                      -1
 
 // Next default values for new objects

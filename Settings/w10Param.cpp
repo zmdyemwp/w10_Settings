@@ -51,8 +51,8 @@ void InitParamW10(void) {
 	memset(&bktimeout, 0, sizeof(bktimeout));
 	bktimeout.title = IDS_WWE_BACKLIGHT_TIMEOUT;
 	bktimeout.count = 0;
-	bktimeout.options[0] = IDS_WWE_STAYS_ON;
-	bktimeout.options[1] = IDS_WWE_SECONDS;
+	//bktimeout.options[0] = IDS_WWE_STAYS_ON;
+	bktimeout.options[0] = IDS_WWE_SECONDS;
 
 	//		backlight level
 	memset(&bklevel, 0, sizeof(bklevel));
@@ -68,7 +68,7 @@ void InitParamW10(void) {
 	recorddata.count = 3;
 	recorddata.options[0] = IDS_WWE_SMART_RECORDING;
 	recorddata.options[1] = IDS_WWE_EVENT_RECORDING;
-	recorddata.options[1] = IDS_WWE_NO_RECORD;
+	recorddata.options[2] = IDS_WWE_NO_RECORD;
 
 	//		Time Zone 1
 	memset(&timezone1, 0, sizeof(timezone1));
@@ -109,7 +109,7 @@ void InitParamW10(void) {
 	autoscroll.options[0] = IDS_WWE_OFF;
 	autoscroll.options[1] = IDS_WWE_SLOW;
 	autoscroll.options[2] = IDS_WWE_MEDIUM;
-	autoscroll.options[2] = IDS_WWE_FAST;
+	autoscroll.options[3] = IDS_WWE_FAST;
 
 	//		ANT+ Step Distance
 	memset(&antfootstep, 0, sizeof(antfootstep));
@@ -120,7 +120,7 @@ void InitParamW10(void) {
 	antfootstep.options[2] = IDS_WWE_OTHER;
 	antfootstep.options[3] = IDS_WWE_CM;
 
-	//		ANT+ Bike
+	//		ANT+ Bike Weight
 	memset(&antbikeweight, 0, sizeof(antbikeweight));
 	antbikeweight.title = IDS_WWE_ANT_BIKE_WEIGHT;
 	antbikeweight.count = 0;
