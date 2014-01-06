@@ -3,9 +3,11 @@
 
 struct W10PARAM {
 	DWORD title;
-	DWORD options[8];
+	DWORD options[16];
 	DWORD count;
 	DWORD index;
+	DWORD * valueList;
+	DWORD vListCount;
 };
 
 extern W10PARAM	mode;

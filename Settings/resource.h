@@ -96,6 +96,8 @@
 #define	IDC_HOUR	301
 #define	IDC_MINUTE	302
 
+#define	IDD_COMBO_EDITy	400
+
 
 #define IDC_STATIC                      -1
 

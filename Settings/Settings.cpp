@@ -292,6 +292,34 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				g_Setting.BTSPPVibration = btsppvibration.index;
 				break;
 
+			//------------------------------------------
+			//		Combo + Edit
+			case IDC_AUTO_LAP:
+				autolap.index = g_Setting.AutoLap;
+				autolap.vListCount = 2;
+				autolap.valueList = new DWORD[autolap.count];
+				autolap.valueList[0] = MAXDWORD;
+				autolap.valueList[1] = g_Setting.LapAtTime;
+				autolap.valueList[2] = g_Setting.LapAtDistance;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&autolap);
+				g_Setting.AutoLap = autolap.index;
+				g_Setting.LapAtTime = autolap.valueList[1];
+				g_Setting.LapAtDistance = autolap.valueList[2];
+				delete [] autolap.valueList;
+				break;
+			case IDC_AUTO_PAUSE:
+				autopause.index = g_Setting.AutoPause;
+				autopause.valueList = new DWORD[autopause.count];
+				autopause.valueList[0] = MAXDWORD;
+				autopause.valueList[1] = MAXDWORD;
+				autopause.valueList[2] = g_Setting.PauseTime;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&autopause);
+				g_Setting.AutoPause = autopause.index;
+				g_Setting.PauseTime = autopause.valueList[2];
+				delete [] autopause.valueList;
+				break;
+
+
 			default:
 				break;
 		}
@@ -405,8 +433,29 @@ void Refresh(void) {
 	SetDlgItemText(g_hDlg, IDC_POSITION_UNIT, temp);
 
 	//		Auto Lap
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_AUTO_LAP_TRIGGER));
+	len = wcslen(temp);
+	if(0 == g_Setting.AutoLap) {
+		swprintf(temp + len, 128 - len, w10_LoadString(IDS_WWE_OFF));
+	} else if( 1 == g_Setting.AutoLap) {
+		swprintf(temp + len, 128 - len, L"%d(%s)",
+			g_Setting.LapAtTime, w10_LoadString(autolap.options[autolap.count+g_Setting.AutoLap]));
+	} else if( 2 == g_Setting.AutoLap) {
+		swprintf(temp + len, 128 - len, L"%d(%s)",
+			g_Setting.LapAtDistance, w10_LoadString(autolap.options[autolap.count+g_Setting.AutoLap]));
+	}
+	SetDlgItemText(g_hDlg, IDC_AUTO_LAP, temp);
 
 	//		Auto Pause
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_AUTO_TIMER_PAUSE));
+	len = wcslen(temp);
+	if(0 == g_Setting.AutoPause || 1 == g_Setting.AutoPause) {
+		swprintf(temp + len, 128 - len, w10_LoadString(autopause.options[g_Setting.AutoPause]));
+	} else if( 2 == g_Setting.AutoPause) {
+		swprintf(temp + len, 128 - len, L"%d(%s)",
+			g_Setting.PauseTime, w10_LoadString(autopause.options[autolap.count+g_Setting.AutoPause]));
+	}
+	SetDlgItemText(g_hDlg, IDC_AUTO_PAUSE, temp);
 
 	//		Auto Scroll
 	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_AUTO_SCROLL));

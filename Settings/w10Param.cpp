@@ -90,8 +90,9 @@ void InitParamW10(void) {
 	autolap.options[0] = IDS_WWE_OFF;
 	autolap.options[1] = IDS_WWE_BY_TIME;
 	autolap.options[2] = IDS_WWE_BY_DISTANCE;
-	autolap.options[3] = IDS_WWE_SECONDS;
-	autolap.options[4] = IDS_WWE_METERS;
+	autolap.options[3] = 0;
+	autolap.options[4] = IDS_WWE_SECONDS;
+	autolap.options[5] = IDS_WWE_METERS;
 
 	//		Auto Pause
 	memset(&autopause, 0, sizeof(autopause));
@@ -100,7 +101,9 @@ void InitParamW10(void) {
 	autopause.options[0] = IDS_WWE_OFF;
 	autopause.options[1] = IDS_WWE_WHEN_STOPPED;
 	autopause.options[2] = IDS_WWE_CUSTOM_PACE;
-	autopause.options[3] = IDS_WWE_SECONDS;
+	autopause.options[3] = 0;
+	autopause.options[4] = 0;
+	autopause.options[5] = IDS_WWE_SECONDS;
 
 	//		Auto Scroll
 	memset(&autoscroll, 0, sizeof(autoscroll));
