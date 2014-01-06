@@ -96,7 +96,15 @@
 #define	IDC_HOUR	301
 #define	IDC_MINUTE	302
 
-#define	IDD_COMBO_EDITy	400
+#define	IDD_COMBO_EDIT	400
+
+#define	IDD_STEP	500
+#define	IDC_EDIT1	501
+#define	IDC_EDIT2	502
+#define	IDC_EDIT3	503
+#define	IDC_RUN	504
+#define	IDC_SWIM	505
+#define	IDC_OTHER	506
 
 
 #define IDC_STATIC                      -1

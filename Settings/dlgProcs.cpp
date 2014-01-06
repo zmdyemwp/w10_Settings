@@ -33,6 +33,9 @@ INT_PTR CALLBACK sampleProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
 	return FALSE;
 }
 
+/*********************************************************************
+*		COMBOBOX
+*/
 INT_PTR CALLBACK ComboListProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	if(WM_INITDIALOG == message) {
 		obj = (W10PARAM *)lParam;
@@ -49,6 +52,9 @@ INT_PTR CALLBACK ComboListProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 	return sampleProc(hDlg,message,wParam,lParam);
 }
 
+/*********************************************************************
+*		EDITTEXT
+*/
 INT_PTR CALLBACK EditProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	if(WM_INITDIALOG == message) {
 		obj = (W10PARAM *)lParam;
@@ -63,6 +69,9 @@ INT_PTR CALLBACK EditProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	return sampleProc(hDlg,message,wParam,lParam);
 }
 
+/*********************************************************************
+*		TIMEZONE (COMBOBOX * 2)
+*/
 INT_PTR CALLBACK TimeZoneProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	if(WM_INITDIALOG == message) {
 		obj = (W10PARAM *)lParam;
@@ -90,7 +99,9 @@ INT_PTR CALLBACK TimeZoneProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 	return sampleProc(hDlg,message,wParam,lParam);
 }
 
-
+/*********************************************************************
+*		COMBOBOX + EDITTEXT
+*/
 void ComboEditRefresh(HWND, W10PARAM*);
 INT_PTR CALLBACK ComboEditProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	static DWORD sel = 0;
@@ -134,3 +145,30 @@ void ComboEditRefresh(HWND hDlg, W10PARAM * obj) {
 		SetDlgItemText(hDlg, IDC_UNIT_TEXT, w10_LoadString(obj->options[obj->count + obj->index]));
 	}
 }
+
+/*********************************************************************
+*		STEP (EDITTEXT * 3)
+*/
+INT_PTR CALLBACK StepProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+	if(WM_INITDIALOG == message) {
+		obj = (W10PARAM *)lParam;
+		//		Options
+		SetDlgItemInt(hDlg, IDC_EDIT1, obj->valueList[0], FALSE);
+		SetDlgItemInt(hDlg, IDC_EDIT2, obj->valueList[1], FALSE);
+		SetDlgItemInt(hDlg, IDC_EDIT3, obj->valueList[2], FALSE);
+		SetDlgItemText(hDlg, IDC_RUN, w10_LoadString(obj->options[0]));
+		SetDlgItemText(hDlg, IDC_SWIM, w10_LoadString(obj->options[1]));
+		SetDlgItemText(hDlg, IDC_OTHER, w10_LoadString(obj->options[2]));
+		TCHAR temp[16+1] = {0};
+		swprintf(temp, 16, L"(%s)", w10_LoadString(obj->options[3]));
+		SetDlgItemText(hDlg, IDC_UNIT_TEXT, temp);
+	} else if(WM_COMMAND == message && IDC_APPLY == LOWORD(wParam)) {
+		//		TODO:	revise value here.
+		obj->valueList[0] = GetDlgItemInt(hDlg, IDC_EDIT1, NULL, FALSE);
+		obj->valueList[1] = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+		obj->valueList[2] = GetDlgItemInt(hDlg, IDC_EDIT3, NULL, FALSE);
+	}
+	return sampleProc(hDlg,message,wParam,lParam);
+}
+
+

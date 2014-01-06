@@ -2,6 +2,10 @@
 #include "w10Param.h"
 #include "StringTable.h"
 
+
+/**************************************************************
+*		Settings
+*/
 W10PARAM	mode;
 W10PARAM	lang;
 W10PARAM	bktimeout;
@@ -28,7 +32,25 @@ W10PARAM	metronomeRing;
 
 W10PARAM	alarm4;
 
+/**************************************************************
+*		Training
+*/
+W10PARAM	timeAlert;
+W10PARAM	distAlert;
+W10PARAM	calorieAlert;
+W10PARAM	heartRateAlert;
+W10PARAM	interval;
+W10PARAM	rest;
+W10PARAM	reps;
+W10PARAM	age;
+W10PARAM	weight_height;
+
+
 void InitParamW10(void) {
+
+/**************************************************************
+*		Settings
+*/
 	//		Mode
 	memset(&mode, 0, sizeof(mode));
 	mode.title = IDS_WWE_MODE;
@@ -178,6 +200,86 @@ void InitParamW10(void) {
 	metronomeRing.title = IDS_WWE_METRONOME_RING;
 	metronomeRing.count = 0;
 	metronomeRing.options[0] = IDS_WWE_MS;
+
+	//		Alarm * 4
+	memset(&alarm4, 0, sizeof(alarm4));
+	alarm4.title = IDS_WWE_ALARM;
+
+
+/**************************************************************
+*		Training
+*/
+	//		Time Alert
+	memset(&timeAlert, 0, sizeof(W10PARAM));
+	timeAlert.title = IDS_WWE_TIME_ALART;
+	timeAlert.count = 2;
+	timeAlert.options[0] = IDS_WWE_OFF;
+	timeAlert.options[1] = IDS_WWE_ON;
+	timeAlert.options[2] = 0;
+	timeAlert.options[3] = IDS_WWE_SECONDS;
+	
+	//		Dist. Alert
+	memset(&distAlert, 0, sizeof(W10PARAM));
+	distAlert.title = IDS_WWE_DISTANCE_ALART;
+	distAlert.count = 2;
+	distAlert.options[0] = IDS_WWE_OFF;
+	distAlert.options[1] = IDS_WWE_ON;
+	distAlert.options[2] = 0;
+	distAlert.options[3] = IDS_WWE_METERS;
+	
+	//		Calorie Alert
+	memset(&calorieAlert, 0, sizeof(W10PARAM));
+	calorieAlert.title = IDS_WWE_CALORIE_ALART;
+	calorieAlert.count = 2;
+	calorieAlert.options[0] = IDS_WWE_OFF;
+	calorieAlert.options[1] = IDS_WWE_ON;
+	calorieAlert.options[2] = 0;
+	calorieAlert.options[3] = IDS_WWE_CAL;
+	
+	//		Heart Rate Alert
+	memset(&heartRateAlert, 0, sizeof(W10PARAM));
+	heartRateAlert.title = IDS_WWE_HR_ALART;
+	heartRateAlert.count = 2;
+	heartRateAlert.options[0] = IDS_WWE_OFF;
+	heartRateAlert.options[1] = IDS_WWE_ON;
+	heartRateAlert.options[2] = 0;
+	heartRateAlert.options[3] = IDS_WWE_BPM;
+	
+	//		Interval
+	memset(&interval, 0, sizeof(W10PARAM));
+	interval.title = IDS_WWE_INTERVAL_TYPE;
+	interval.count = 2;
+	interval.options[0] = IDS_WWE_TIME;
+	interval.options[1] = IDS_WWE_DISTANCE;
+	interval.options[2] = IDS_WWE_SECONDS;
+	interval.options[3] = IDS_WWE_METERS;
+	
+	//		Rest
+	memset(&rest, 0, sizeof(W10PARAM));
+	rest.title = IDS_WWE_REST_TYPE;
+	rest.count = 2;
+	rest.options[0] = IDS_WWE_TIME;
+	rest.options[1] = IDS_WWE_DISTANCE;
+	rest.options[2] = IDS_WWE_SECONDS;
+	rest.options[3] = IDS_WWE_METERS;
+	
+	//		Repeat
+	memset(&reps, 0, sizeof(W10PARAM));
+	reps.title = IDS_WWE_REPEATS;
+	
+	//		Age
+	memset(&age, 0, sizeof(W10PARAM));
+	age.title = IDS_WWE_AGE;
+	
+	//		Weight & Height
+	memset(&weight_height, 0, sizeof(W10PARAM));
+	weight_height.title = IDS_WWE_WEIGHT_HEIGHT;
+	weight_height.count = 0;
+	weight_height.options[0] = IDS_WWE_KG;
+	weight_height.options[1] = IDS_WWE_CM;
+	weight_height.options[2] = IDS_WWE_POUND;
+	weight_height.options[3] = IDS_WWE_INCH;
+
 
 }
 

@@ -49,23 +49,6 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		Refresh();
 		return (INT_PTR)TRUE;
 
-	/*case WM_CTLCOLORBTN:
-		{
-			DWORD id = GetDlgCtrlID((HWND)lParam);
-			//if(checkDoneTable(id)) {
-			if(1) {
-				swprintf(msg, 1024, L"ID: %d", id);
-				dmsg(msg);
-				if(CLR_INVALID == SetTextColor((HDC)wParam, RGB(255,0,0))) {
-					swprintf(msg, 1024, L"SetTextColor()::%d", GetLastError());
-					dmsg(msg);
-				}
-				SetBkMode((HDC)wParam, TRANSPARENT);    
-				return (LRESULT)GetStockObject(NULL_BRUSH);
-			}
-		}
-		return (LRESULT)GetStockObject(BLACK_BRUSH);*/
-
 	case WM_COMMAND:
 		switch(LOWORD(wParam)) {
 			case IDCANCEL:
@@ -76,9 +59,11 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				EndDialog(hDlg, LOWORD(wParam));
 				return (INT_PTR)TRUE;
 
-			//------------------------------------------
-			//		BOOL Options
-			//			Settings
+
+			/*********************************************************************
+			*		BOOL
+			*			Settings
+			*/
 			case IDC_KEYTONE:
 				reverseBool(g_Setting.KeyTone);
 				break;
@@ -165,9 +150,12 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			case IDC_METRONOME_STATE:
 				reverseBool(g_Setting.Metronome);
 				break;
-			//------------------------------------------
-			//		BOOL Options
-			//			Training
+
+
+			/*********************************************************************
+			*		BOOL
+			*			Training
+			*/
 			case IDC_WARM_UP:
 				reverseBool(g_Training.WarmUp);
 				break;
@@ -180,8 +168,11 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			case IDC_LIFETIME_ATHLETE:
 				reverseBool(g_Training.LFAthlete);
 				break;
-			//------------------------------------------
-			//		COMBO Options
+
+
+			/*********************************************************************
+			*		COMBOBOX
+			*/
 			case IDC_MODE:
 				if(0 < g_Setting.Mode && 6 > g_Setting.Mode) {
 					mode.index = g_Setting.Mode - 1;
@@ -241,8 +232,11 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_LIST), hDlg, ComboListProc, (LPARAM)&autoscroll);
 				g_Setting.AutoScroll = autoscroll.index;
 				break;
-			//------------------------------------------
-			//		Time Zone
+
+
+			/*********************************************************************
+			*		TIMEZONE
+			*/
 			case IDC_TIME_ZONE_1:
 				timezone1.index = g_Setting.TimeZone;
 				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_TIMEZONE), hDlg, TimeZoneProc, (LPARAM)&timezone1);
@@ -253,8 +247,11 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_TIMEZONE), hDlg, TimeZoneProc, (LPARAM)&timezone2);
 				g_Setting.TimeZone2 = timezone2.index;
 				break;
-			//------------------------------------------
-			//		Edit Options
+
+				
+			/*********************************************************************
+			*		EDITTEXT
+			*/
 			case IDC_BK_TIMEOUT:
 				bktimeout.index = g_Setting.BacklightTimeout;
 				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&bktimeout);
@@ -292,8 +289,34 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				g_Setting.BTSPPVibration = btsppvibration.index;
 				break;
 
-			//------------------------------------------
-			//		Combo + Edit
+			case IDC_METRONOME_INTERVAL:
+				metronomeInterval.index = g_Setting.MetronomeTime;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&metronomeInterval);
+				g_Setting.MetronomeTime = metronomeInterval.index;
+				break;
+
+			case IDC_METRONOME_RING_TIME:
+				metronomeRing.index = g_Setting.MetronomeRing;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&metronomeRing);
+				g_Setting.MetronomeRing = metronomeRing.index;
+				break;
+
+			case IDC_REPTS:
+				reps.index = g_Training.Reps;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&reps);
+				g_Training.Reps = reps.index;
+				break;
+
+			case IDC_AGE:
+				age.index = g_Training.Age;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_EDIT), hDlg, EditProc, (LPARAM)&age);
+				g_Training.Age = age.index;
+				break;
+
+
+			/*********************************************************************
+			*		COMBOBOX + EDITTEXT
+			*/
 			case IDC_AUTO_LAP:
 				autolap.index = g_Setting.AutoLap;
 				autolap.vListCount = 2;
@@ -317,6 +340,128 @@ INT_PTR CALLBACK SettingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				g_Setting.AutoPause = autopause.index;
 				g_Setting.PauseTime = autopause.valueList[2];
 				delete [] autopause.valueList;
+				break;
+
+			case IDC_TIME_ALERT:
+				timeAlert.index = g_Training.TimeAlert;
+				timeAlert.vListCount = 2;
+				timeAlert.valueList = new DWORD [timeAlert.count];
+				timeAlert.valueList[0] = MAXDWORD;
+				timeAlert.valueList[1] = g_Training.TimeAlertTime;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&timeAlert);
+				g_Training.TimeAlert = timeAlert.index;
+				g_Training.TimeAlertTime = timeAlert.valueList[1];
+				delete [] timeAlert.valueList;
+				break;
+
+			case IDC_DIST_ALERT:
+				distAlert.index = g_Training.DistanceAlert;
+				distAlert.vListCount = 2;
+				distAlert.valueList = new DWORD [distAlert.count];
+				distAlert.valueList[0] = MAXDWORD;
+				distAlert.valueList[1] = g_Training.DistanceAlertValue;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&distAlert);
+				g_Training.DistanceAlert = distAlert.index;
+				g_Training.DistanceAlertValue = distAlert.valueList[1];
+				delete [] distAlert.valueList;
+				break;
+				
+			case IDC_CALORIE_ALERT:
+				calorieAlert.index = g_Training.ColorieAlert;
+				calorieAlert.vListCount = 2;
+				calorieAlert.valueList = new DWORD [calorieAlert.count];
+				calorieAlert.valueList[0] = MAXDWORD;
+				calorieAlert.valueList[1] = g_Training.ColorieAlertValue;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&calorieAlert);
+				g_Training.ColorieAlert = calorieAlert.index;
+				g_Training.ColorieAlertValue = calorieAlert.valueList[1];
+				delete [] calorieAlert.valueList;
+				break;
+
+			case IDC_HR_ALERT:
+				heartRateAlert.index = g_Training.HRAlert;
+				heartRateAlert.vListCount = 2;
+				heartRateAlert.valueList = new DWORD [heartRateAlert.count];
+				heartRateAlert.valueList[0] = MAXDWORD;
+				heartRateAlert.valueList[1] = g_Training.HRAlertValue;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&heartRateAlert);
+				g_Training.HRAlert = heartRateAlert.index;
+				g_Training.HRAlertValue= heartRateAlert.valueList[1];
+				delete [] heartRateAlert.valueList;
+				break;
+
+			case IDC_INTERVAL:
+				interval.index = g_Training.IntervalType;
+				interval.vListCount = 2;
+				interval.valueList = new DWORD [interval.count];
+				interval.valueList[0] = g_Training.IntervalTime;
+				interval.valueList[1] = g_Training.IntervalDistance;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&interval);
+				g_Training.IntervalType = interval.index;
+				g_Training.IntervalTime= interval.valueList[0];
+				g_Training.IntervalDistance= interval.valueList[1];
+				delete [] interval.valueList;
+				break;
+
+			case IDC_REST:
+				rest.index = g_Training.RestType;
+				rest.vListCount = 2;
+				rest.valueList = new DWORD [rest.count];
+				rest.valueList[0] = g_Training.RestTime;
+				rest.valueList[1] = g_Training.RestDistance;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_COMBO_EDIT), hDlg, ComboEditProc, (LPARAM)&rest);
+				g_Training.RestType = rest.index;
+				g_Training.RestTime= rest.valueList[0];
+				g_Training.RestDistance= rest.valueList[1];
+				delete [] rest.valueList;
+				break;
+
+
+			/*********************************************************************
+			*		EDITTEXT * 3
+			*/
+			case IDC_ANT_FOOT_STEP_DISTANCE:
+				antfootstep.vListCount = 3;
+				antfootstep.valueList = new DWORD[3];
+				antfootstep.valueList[0] = g_Setting.ANTFootPodRunDistance;
+				antfootstep.valueList[1] = g_Setting.ANTFootPodSwimDistance;
+				antfootstep.valueList[2] = g_Setting.ANTFootPodOtherDistance;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_STEP), hDlg, StepProc, (LPARAM)&antfootstep);
+				g_Setting.ANTFootPodRunDistance = antfootstep.valueList[0];
+				g_Setting.ANTFootPodSwimDistance = antfootstep.valueList[1];
+				g_Setting.ANTFootPodOtherDistance = antfootstep.valueList[2];
+				delete [] antfootstep.valueList;
+				break;
+
+			case IDC_GSENSOR_STEP_DISTANCE:
+				gsensorstep.vListCount = 3;
+				gsensorstep.valueList = new DWORD[3];
+				gsensorstep.valueList[0] = g_Setting.GSensorRunDistance;
+				gsensorstep.valueList[1] = g_Setting.GSensorSwimDistance;
+				gsensorstep.valueList[2] = g_Setting.GSensorOtherDistance;
+				DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_STEP), hDlg, StepProc, (LPARAM)&gsensorstep);
+				g_Setting.GSensorRunDistance = gsensorstep.valueList[0];
+				g_Setting.GSensorSwimDistance = gsensorstep.valueList[1];
+				g_Setting.GSensorOtherDistance = gsensorstep.valueList[2];
+				delete [] gsensorstep.valueList;
+				break;
+
+				
+			case IDC_ALARM:
+				memset(alarm4.options, 0, sizeof(alarm4.options));
+				for(DWORD i = 0; i < 4; i++) {
+					alarm4.options[3 * i + 0] = g_Setting.AlarmOn[i];
+					alarm4.options[3 * i + 1] = g_Setting.AlarmWeek[1];
+					alarm4.options[3 * i + 2] = g_Setting.AlarmHour[i];
+					alarm4.options[3 * i + 3] = g_Setting.AlarmMin[i];
+				}
+				//DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_STEP), hDlg, StepProc, (LPARAM)&gsensorstep);
+				for(DWORD i = 0; i < 4; i++) {
+					g_Setting.AlarmOn[i] = alarm4.options[3 * i + 0];
+					g_Setting.AlarmWeek[1] = alarm4.options[3 * i + 1];
+					g_Setting.AlarmHour[i] = alarm4.options[3 * i + 2];
+					g_Setting.AlarmMin[i] = alarm4.options[3 * i + 3];
+				}
 				break;
 
 
@@ -484,7 +629,18 @@ void Refresh(void) {
 	fillTrueFalse(IDC_ANT_FOOT_PAD_SOURCE, g_Setting.ANTFootPadSource, IDS_WWE_ANT_FOOT_PAD_SOURCE, IDS_WWE_GPS, IDS_WWE_FOOT_PAD);
 
 	//		ANT+ Foot Pad Step Distance
-
+	{
+		swprintf(temp, 128, w10_LoadString(IDS_WWE_ANT_FOOT_PAD_STEP_DISTANCE));
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L" (%s)", w10_LoadString(IDS_WWE_CM));
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L"\r\n%s: %d\r\n", w10_LoadString(IDS_WWE_RUN), g_Setting.ANTFootPodRunDistance);
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L"%s: %d\r\n", w10_LoadString(IDS_WWE_SWIM), g_Setting.ANTFootPodSwimDistance);
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L"%s: %d", w10_LoadString(IDS_WWE_OTHER), g_Setting.ANTFootPodOtherDistance);
+		SetDlgItemText(g_hDlg, IDC_ANT_FOOT_STEP_DISTANCE, temp);
+	}
 
 	//		ANT+ Bike Weight
 	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_ANT_BIKE_WEIGHT));
@@ -517,7 +673,18 @@ void Refresh(void) {
 	fillTrueFalse(IDC_GSENSOR_COMPASS_SENSOR, g_Setting.GSensorOn, IDS_WWE_GSENSOR_COMPASS, IDS_WWE_NO, IDS_WWE_YES);
 
 	//		GSensor Step Distance
-
+	{
+		swprintf(temp, 128, w10_LoadString(IDS_WWE_GSENSOR_STEP_DISTANCE));
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L" (%s)", w10_LoadString(IDS_WWE_CM));
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L"\r\n%s: %d\r\n", w10_LoadString(IDS_WWE_RUN), g_Setting.GSensorRunDistance);
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L"%s: %d\r\n", w10_LoadString(IDS_WWE_SWIM), g_Setting.GSensorSwimDistance);
+		len = wcslen(temp);
+		swprintf(temp + len, 128 - len, L"%s: %d", w10_LoadString(IDS_WWE_OTHER), g_Setting.GSensorOtherDistance);
+		SetDlgItemText(g_hDlg, IDC_GSENSOR_STEP_DISTANCE, temp);
+	}
 
 	//		BLE Finder
 	fillTrueFalse(IDC_BLE_FINDER, g_Setting.BLEFinder, IDS_WWE_BLE_FINDER, IDS_WWE_NO, IDS_WWE_YES);
@@ -578,18 +745,70 @@ void Refresh(void) {
 
 	//------------------------------------------------------------------
 	//		Time Alert
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_TIME_ALART));
+	len = wcslen(temp);
+	if(0 == g_Training.TimeAlert) {
+		swprintf(temp + len, 128 - len, w10_LoadString(IDS_WWE_OFF));
+	} else {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.TimeAlertTime, w10_LoadString(IDS_WWE_SECONDS));
+	}
+	SetDlgItemText(g_hDlg, IDC_TIME_ALERT, temp);
 
 	//		Distance Alert
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_DISTANCE_ALART));
+	len = wcslen(temp);
+	if(0 == g_Training.DistanceAlert) {
+		swprintf(temp + len, 128 - len, w10_LoadString(IDS_WWE_OFF));
+	} else {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.DistanceAlertValue, w10_LoadString(IDS_WWE_METERS));
+	}
+	SetDlgItemText(g_hDlg, IDC_DIST_ALERT, temp);
 
 	//		Calorie Alert
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_CALORIE_ALART));
+	len = wcslen(temp);
+	if(0 == g_Training.ColorieAlert) {
+		swprintf(temp + len, 128 - len, w10_LoadString(IDS_WWE_OFF));
+	} else {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.ColorieAlertValue, w10_LoadString(IDS_WWE_CAL));
+	}
+	SetDlgItemText(g_hDlg, IDC_CALORIE_ALERT, temp);
 
 	//		Heart Rate Alert
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_HR_ALART));
+	len = wcslen(temp);
+	if(0 == g_Training.HRAlert) {
+		swprintf(temp + len, 128 - len, w10_LoadString(IDS_WWE_OFF));
+	} else {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.HRAlertValue, w10_LoadString(IDS_WWE_BPM));
+	}
+	SetDlgItemText(g_hDlg, IDC_HR_ALERT, temp);
 
 	//		Interval
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_INTERVAL_TYPE));
+	len = wcslen(temp);
+	if(0 == g_Training.IntervalType) {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.IntervalTime, w10_LoadString(IDS_WWE_SECONDS));
+	} else {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.IntervalDistance, w10_LoadString(IDS_WWE_METERS));
+	}
+	SetDlgItemText(g_hDlg, IDC_INTERVAL, temp);
 
 	//		Rest
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_REST_TYPE));
+	len = wcslen(temp);
+	if(0 == g_Training.RestType) {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.RestTime, w10_LoadString(IDS_WWE_SECONDS));
+	} else {
+		swprintf(temp + len, 128 - len, L"%d %s", g_Training.RestDistance, w10_LoadString(IDS_WWE_METERS));
+	}
+	SetDlgItemText(g_hDlg, IDC_REST, temp);
 
 	//		Reps
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_REPEATS));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d", g_Training.Reps);
+	SetDlgItemText(g_hDlg, IDC_REPTS, temp);
 
 	//		Warm Up
 	fillTrueFalse(IDC_WARM_UP, g_Training.WarmUp, IDS_WWE_WARM_UP, IDS_WWE_DISABLE, IDS_WWE_ENABLE);
@@ -601,6 +820,10 @@ void Refresh(void) {
 	fillTrueFalse(IDC_GENDER, g_Training.Gender, IDS_WWE_GENDER, IDS_WWE_MALE, IDS_WWE_FEMALE);
 
 	//		Age
+	swprintf(temp, 128, L"%s ", w10_LoadString(IDS_WWE_AGE));
+	len = wcslen(temp);
+	swprintf(temp + len, 128 - len, L"%d", g_Training.Age);
+	SetDlgItemText(g_hDlg, IDC_AGE, temp);
 
 	//		Weight & Height
 

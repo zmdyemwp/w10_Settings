@@ -10,6 +10,9 @@ struct W10PARAM {
 	DWORD vListCount;
 };
 
+/**************************************************************
+*		Training
+*/
 extern W10PARAM	mode;
 extern W10PARAM	lang;
 extern W10PARAM	bktimeout;
@@ -35,6 +38,21 @@ extern W10PARAM	metronomeInterval;
 extern W10PARAM	metronomeRing;
 
 extern W10PARAM	alarm4;
+
+/**************************************************************
+*		Settings
+*/
+extern W10PARAM	timeAlert;
+extern W10PARAM	distAlert;
+extern W10PARAM	calorieAlert;
+extern W10PARAM	heartRateAlert;
+extern W10PARAM	interval;
+extern W10PARAM	rest;
+extern W10PARAM	reps;
+extern W10PARAM	age;
+extern W10PARAM	weight_height;
+
+
 
 void InitParamW10(void);
 
